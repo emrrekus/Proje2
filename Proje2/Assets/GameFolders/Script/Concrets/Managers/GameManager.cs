@@ -17,6 +17,16 @@ namespace Proje2.Managers
         {
             Time.timeScale = 0f;
         }
+
+        public void LoadScene()
+        {
+            
+        }
+
+        public void ExitGame()
+        {
+            Application.Quit();
+        }
     }
     
 }
