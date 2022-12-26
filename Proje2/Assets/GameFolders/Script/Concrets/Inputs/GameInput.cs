@@ -63,7 +63,7 @@ namespace Proje2.Inputs
                 {
                     ""name"": ""negative"",
                     ""id"": ""51624d7e-791b-41f7-938c-421f4a568fe4"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -74,7 +74,7 @@ namespace Proje2.Inputs
                 {
                     ""name"": ""positive"",
                     ""id"": ""38f2ae03-b839-40d4-8fcd-ad5a9b1507ff"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
