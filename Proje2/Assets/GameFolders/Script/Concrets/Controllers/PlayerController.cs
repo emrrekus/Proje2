@@ -12,15 +12,19 @@ namespace Proje2.Controllers
 {
     public class PlayerController : MonoBehaviour
     {
-      
+        [SerializeField] private float _moveBoundary = 4.5f;
         [SerializeField] float _moveSpeed = 10f;
         [SerializeField] float _jumpForce = 300f;
         [SerializeField] bool _isJump;
 
         HorizontalMover _horizontalMover;
         JumpWithRigibody _jump;
-         IInputReader _input;
-         private float _horizontal;
+        IInputReader _input;
+        private float _horizontal;
+        private bool _ısJump;
+
+        public float MoveSpeed => _moveSpeed;
+        public float MoveBoundary => _moveBoundary;
 
         private void Awake()
         {
@@ -32,6 +36,10 @@ namespace Proje2.Controllers
         private void Update()
         {
             _horizontal = _input.Horizontal;
+            if (_input.IsJump)
+            {
+                _isJump = true;
+            }
         }
 
         private void FixedUpdate()

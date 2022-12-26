@@ -10,6 +10,8 @@ namespace Proje2.Movements
         private Rigidbody _rb;
         private PlayerController _playerController;
 
+        public bool CanJump => _rb.velocity.y != 0f;
+        
         public JumpWithRigibody(PlayerController playerController)
         {
             _rb = playerController.GetComponent<Rigidbody>();
@@ -17,7 +19,7 @@ namespace Proje2.Movements
 
         public void TickFixed(float jumpForce)
         {
-            if(_rb.velocity.y!=0) return;
+            if(CanJump) return;
             
             _rb.velocity= Vector3.zero;
             _rb.AddForce(Vector3.up * Time.deltaTime * jumpForce);

@@ -37,6 +37,15 @@ namespace Proje2.Inputs
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""04aaf0d8-a2e6-4138-8b0d-6abb3e55b01e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -72,6 +81,17 @@ namespace Proje2.Inputs
                     ""action"": ""HorizontalMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""38b229f4-0a08-4c97-8cf5-6e7ad0abb633"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Tap(duration=0.01)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -81,6 +101,7 @@ namespace Proje2.Inputs
             // PlayerOnFoot
             m_PlayerOnFoot = asset.FindActionMap("PlayerOnFoot", throwIfNotFound: true);
             m_PlayerOnFoot_HorizontalMove = m_PlayerOnFoot.FindAction("HorizontalMove", throwIfNotFound: true);
+            m_PlayerOnFoot_Jump = m_PlayerOnFoot.FindAction("Jump", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -141,11 +162,13 @@ namespace Proje2.Inputs
         private readonly InputActionMap m_PlayerOnFoot;
         private IPlayerOnFootActions m_PlayerOnFootActionsCallbackInterface;
         private readonly InputAction m_PlayerOnFoot_HorizontalMove;
+        private readonly InputAction m_PlayerOnFoot_Jump;
         public struct PlayerOnFootActions
         {
             private @GameInput m_Wrapper;
             public PlayerOnFootActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @HorizontalMove => m_Wrapper.m_PlayerOnFoot_HorizontalMove;
+            public InputAction @Jump => m_Wrapper.m_PlayerOnFoot_Jump;
             public InputActionMap Get() { return m_Wrapper.m_PlayerOnFoot; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -158,6 +181,9 @@ namespace Proje2.Inputs
                     @HorizontalMove.started -= m_Wrapper.m_PlayerOnFootActionsCallbackInterface.OnHorizontalMove;
                     @HorizontalMove.performed -= m_Wrapper.m_PlayerOnFootActionsCallbackInterface.OnHorizontalMove;
                     @HorizontalMove.canceled -= m_Wrapper.m_PlayerOnFootActionsCallbackInterface.OnHorizontalMove;
+                    @Jump.started -= m_Wrapper.m_PlayerOnFootActionsCallbackInterface.OnJump;
+                    @Jump.performed -= m_Wrapper.m_PlayerOnFootActionsCallbackInterface.OnJump;
+                    @Jump.canceled -= m_Wrapper.m_PlayerOnFootActionsCallbackInterface.OnJump;
                 }
                 m_Wrapper.m_PlayerOnFootActionsCallbackInterface = instance;
                 if (instance != null)
@@ -165,6 +191,9 @@ namespace Proje2.Inputs
                     @HorizontalMove.started += instance.OnHorizontalMove;
                     @HorizontalMove.performed += instance.OnHorizontalMove;
                     @HorizontalMove.canceled += instance.OnHorizontalMove;
+                    @Jump.started += instance.OnJump;
+                    @Jump.performed += instance.OnJump;
+                    @Jump.canceled += instance.OnJump;
                 }
             }
         }
@@ -172,6 +201,7 @@ namespace Proje2.Inputs
         public interface IPlayerOnFootActions
         {
             void OnHorizontalMove(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
         }
     }
 }
