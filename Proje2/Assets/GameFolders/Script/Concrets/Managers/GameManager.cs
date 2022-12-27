@@ -9,6 +9,7 @@ namespace Proje2.Managers
 {
     public class GameManager : SingletonMBObject<GameManager>
     {
+        public event System.Action OnGameStop;
         private void Awake()
         {
             SingletonThisObject(this);
@@ -17,6 +18,8 @@ namespace Proje2.Managers
         public void StopGame()
         {
             Time.timeScale = 0f;
+            
+            OnGameStop?.Invoke();
         }
 
         public void LoadScene(string sceneName)

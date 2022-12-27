@@ -17,7 +17,7 @@ namespace Proje2.Controllers
 
         private void Update()
         {
-            _material.mainTextureOffset += Vector2.down * Time.deltaTime * _moveSpeed;
+            _material.mainTextureOffset += Vector2.up * Time.deltaTime * _moveSpeed;
         }
     }
     
