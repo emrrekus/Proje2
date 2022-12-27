@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Proje2.Managers;
 using UnityEngine;
 
 namespace  Proje2.Controllers
@@ -36,7 +37,7 @@ namespace  Proje2.Controllers
 
         private void KillYourself()
         {
-            Destroy(gameObject);
+            EnemyManager.Instance.SetPool();
         }
     }
 }
