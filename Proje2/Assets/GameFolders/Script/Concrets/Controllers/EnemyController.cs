@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Proje2.Abstracts.Controllers;
 using Proje2.Managers;
 using UnityEngine;
 
 namespace  Proje2.Controllers
 {
-    public class EnemyController : MonoBehaviour
+    public class EnemyController : MonoBehaviour,IEntityController
     {
         [SerializeField] private float _moveSpeed = 10f;
         private VerticalMover _verticalMover;
@@ -37,7 +38,7 @@ namespace  Proje2.Controllers
 
         private void KillYourself()
         {
-            EnemyManager.Instance.SetPool();
+            EnemyManager.Instance.SetPool(this);
         }
     }
 }

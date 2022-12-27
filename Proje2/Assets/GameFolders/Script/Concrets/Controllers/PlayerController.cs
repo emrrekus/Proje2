@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Proje2.Abstracts.Controllers;
 using Proje2.Abstracts.Inputs;
+using Proje2.Abstracts.Movements;
 using Proje2.Inputs;
 using Proje2.Managers;
 using Proje2.Movements;
@@ -11,15 +13,15 @@ using UnityEngine.InputSystem;
 
 namespace Proje2.Controllers
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour,IEntityController
     {
         [SerializeField] private float _moveBoundary = 4.5f;
         [SerializeField] float _moveSpeed = 10f;
         [SerializeField] float _jumpForce = 300f;
         [SerializeField] bool _isJump;
 
-        HorizontalMover _horizontalMover;
-        JumpWithRigibody _jump;
+        IMover _mover;
+        IJump _jump;
         IInputReader _input;
         private float _horizontal;
         private bool _ısJump;
@@ -30,7 +32,7 @@ namespace Proje2.Controllers
 
         private void Awake()
         {
-            _horizontalMover = new HorizontalMover(this);
+            _mover = new HorizontalMover(this);
             _jump = new JumpWithRigibody(this);
             _input = new InputReader(GetComponent<PlayerInput>());
         }
@@ -47,11 +49,11 @@ namespace Proje2.Controllers
 
         private void FixedUpdate()
         {
-            _horizontalMover.TickFixed(_horizontal, _moveSpeed);
+            _mover.FixedTick(_horizontal);
 
             if (_isJump)
             {
-                _jump.TickFixed(_jumpForce);
+                _jump.FixedTick(_jumpForce);
             }
 
             _isJump = false;
@@ -59,7 +61,7 @@ namespace Proje2.Controllers
 
         private void OnTriggerEnter(Collider other)
         {
-            EnemyController enemyController = other.GetComponent<EnemyController>();
+            IEntityController enemyController = other.GetComponent<IEntityController>();
             if (enemyController != null)
             {
                 _isDead = true;

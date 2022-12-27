@@ -1,24 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Proje2.Abstracts.Controllers;
+using Proje2.Abstracts.Movements;
 using Proje2.Controllers;
 using UnityEngine;
 
 namespace Proje2.Movements
 {
-    public class HorizontalMover
+    public class HorizontalMover: IMover
     {
-        private PlayerController _playerController;
+        private IEntityController _playerController;
         private float _moveSpeed;
         private float _moveBoundary;
 
-        public HorizontalMover(PlayerController playerController)
+        public HorizontalMover(IEntityController entityController)
         {
-            _playerController = playerController;
-            _moveSpeed = _playerController.MoveSpeed;
-            _moveBoundary = _playerController.MoveBoundary;
+            _playerController = entityController;
+          /*  _moveSpeed = _playerController.MoveSpeed;
+            _moveBoundary = _playerController.MoveBoundary;*/
         }
 
-        public void TickFixed(float horizontal, float moveSpeed)
+        public void FixedTick(float horizontal)
         {
             if (horizontal == 0f)
             {
@@ -29,5 +31,7 @@ namespace Proje2.Movements
             float xBoundary = Mathf.Clamp(_playerController.transform.position.x, -_moveBoundary, _moveBoundary);
             _playerController.transform.position = new Vector3(xBoundary, _playerController.transform.position.y,_playerController.transform.position.z);
         }
+
+       
     }
 }

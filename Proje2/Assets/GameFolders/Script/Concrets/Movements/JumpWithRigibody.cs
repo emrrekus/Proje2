@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Proje2.Abstracts.Movements;
 using Proje2.Controllers;
 using UnityEngine;
 
 namespace Proje2.Movements
 {
-    public class JumpWithRigibody : MonoBehaviour
+    public class JumpWithRigibody : MonoBehaviour,IJump
     {
         private Rigidbody _rb;
         private PlayerController _playerController;
@@ -17,13 +18,15 @@ namespace Proje2.Movements
             _rb = playerController.GetComponent<Rigidbody>();
         }
 
-        public void TickFixed(float jumpForce)
+        public void FixedTick(float jumpForce)
         {
             if(CanJump) return;
             
             _rb.velocity= Vector3.zero;
             _rb.AddForce(Vector3.up * Time.deltaTime * jumpForce);
         }
+
+       
     } 
 }
 
