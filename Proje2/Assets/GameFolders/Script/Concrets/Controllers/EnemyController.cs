@@ -5,17 +5,15 @@ using Proje2.Abstracts.Controllers;
 using Proje2.Managers;
 using UnityEngine;
 
-namespace  Proje2.Controllers
+namespace Proje2.Controllers
 {
-    public class EnemyController : MonoBehaviour,IEntityController
+    public class EnemyController : MyCharacterController, IEntityController
     {
-        [SerializeField] private float _moveSpeed = 10f;
         private VerticalMover _verticalMover;
         [SerializeField] private float _maxLifeTime;
-
         private float _currentLifeTime = 0f;
 
-        public float MoveSpeed => _moveSpeed;
+
         private void Awake()
         {
             _verticalMover = new VerticalMover(this);
@@ -42,4 +40,3 @@ namespace  Proje2.Controllers
         }
     }
 }
-

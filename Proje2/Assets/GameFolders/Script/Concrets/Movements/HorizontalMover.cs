@@ -16,8 +16,8 @@ namespace Proje2.Movements
         public HorizontalMover(IEntityController entityController)
         {
             _playerController = entityController;
-          /*  _moveSpeed = _playerController.MoveSpeed;
-            _moveBoundary = _playerController.MoveBoundary;*/
+            _moveSpeed = _playerController.MoveSpeed;
+            _moveBoundary = _playerController.MoveBoundary;
         }
 
         public void FixedTick(float horizontal)

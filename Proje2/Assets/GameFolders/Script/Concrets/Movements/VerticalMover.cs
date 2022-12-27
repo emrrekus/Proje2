@@ -17,7 +17,7 @@ namespace Proje2.Controllers
         {
 
             _entityController = enemyController;
-            /*_moveSpeed = _entityController.MoveSpeed;*/
+            _moveSpeed = _entityController.MoveSpeed;
         }
 
         public void FixedTick(float vertical= 1)

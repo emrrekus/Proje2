@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Proje2.Abstracts.Controllers;
@@ -13,10 +12,9 @@ using UnityEngine.InputSystem;
 
 namespace Proje2.Controllers
 {
-    public class PlayerController : MonoBehaviour,IEntityController
+    public class PlayerController : MyCharacterController,IEntityController
     {
-        [SerializeField] private float _moveBoundary = 4.5f;
-        [SerializeField] float _moveSpeed = 10f;
+    
         [SerializeField] float _jumpForce = 300f;
         [SerializeField] bool _isJump;
 
@@ -27,8 +25,7 @@ namespace Proje2.Controllers
         private bool _ısJump;
         private bool _isDead;
 
-        public float MoveSpeed => _moveSpeed;
-        public float MoveBoundary => _moveBoundary;
+     
 
         private void Awake()
         {
