@@ -9,6 +9,7 @@ namespace Proje2.UIS
     public class GameCanvas : MonoBehaviour
     {
         [SerializeField] private GameOverPanel _gameOverPanel;
+       
 
         private void Awake()
         {

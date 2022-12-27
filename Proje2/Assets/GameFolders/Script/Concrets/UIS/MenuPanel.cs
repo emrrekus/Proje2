@@ -7,8 +7,9 @@ namespace Proje2.UIS
 {
     public class MenuPanel : MonoBehaviour
     {
-        public void StartButton()
+        public void DifficultyButton(int index)
         {
+            GameManager.Instance.DifficultyIndex = index;
             GameManager.Instance.LoadScene("Game");
         }
 

@@ -41,5 +41,11 @@ namespace Proje2.Controllers
         {
             EnemyManager.Instance.SetPool(this);
         }
+
+        public void SetMoveSpeed(float speed)
+        {
+            if(speed <_moveSpeed)return;
+            _moveSpeed = speed;
+        }
     }
 }

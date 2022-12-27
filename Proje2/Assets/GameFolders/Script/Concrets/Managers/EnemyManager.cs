@@ -11,13 +11,14 @@ namespace Proje2.Managers
 {
     public class EnemyManager : SingletonMBObject<EnemyManager>
     {
-        [SerializeField] private float _addDelayTime = 50f;
+        [SerializeField] private float _addDelayTime;
         [SerializeField] private EnemyController[] _enemyPrefabs;
 
         Dictionary<EnemyEnum, Queue<EnemyController>> _enemies = new Dictionary<EnemyEnum, Queue<EnemyController>>();
         public float AddDelayTime => _addDelayTime;
         public int Count => _enemyPrefabs.Length;
 
+        private float _moveSpeed;
         private void Awake()
         {
             SingletonThisObject(this);
@@ -67,7 +68,19 @@ namespace Proje2.Managers
                
             }
 
-            return enemyControllers.Dequeue();
+            EnemyController enemyController = enemyControllers.Dequeue();
+            enemyController.SetMoveSpeed(_moveSpeed);
+            return enemyController;
+        }
+
+        public void SetMoveSpeed(float moveSpeed)
+        {
+            _moveSpeed = moveSpeed;
+        }
+
+        public void SetDelayTime(float delayTime)
+        {
+            _addDelayTime = delayTime;
         }
     }
 }
