@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Proje2.Enums;
 using Proje2.Managers;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,6 +15,9 @@ namespace Proje2.Controllers
 
         private float _currentSpawnTime = 0f;
         private float _maxSpawnTime;
+        private int _index = 0;
+        private float _maxAddEnemyTime;
+        public bool CanIncrease => _index < EnemyManager.Instance.Count;
 
         private void OnEnable()
         {
@@ -28,11 +32,20 @@ namespace Proje2.Controllers
             {
                 Spawn();
             }
+            if(!CanIncrease) return;
+
+            if (_maxAddEnemyTime < Time.time)
+            {
+                _maxAddEnemyTime = Time.time + EnemyManager.Instance.AddDelayTime;
+                IncreaseIndex();
+                
+            }
         }
 
+      
         void Spawn()
         {
-            EnemyController newEnemy = EnemyManager.Instance.GetPool();
+           EnemyController newEnemy = EnemyManager.Instance.GetPool((EnemyEnum)UnityEngine.Random.Range(0,_index));
             newEnemy.transform.parent = this.transform;
             newEnemy.transform.position = this.transform.position;
             newEnemy.gameObject.SetActive(true);
@@ -45,5 +58,13 @@ namespace Proje2.Controllers
         {
             _maxSpawnTime = UnityEngine.Random.Range(_min, _max);
         }
+        private void IncreaseIndex()
+        {
+            if (CanIncrease)
+            {
+                _index++;
+            }
+        }
+
     }
 }
